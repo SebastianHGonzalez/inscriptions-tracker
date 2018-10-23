@@ -23,7 +23,7 @@ public class Ejercicio1 {
 	    	count2++;
 	    }
 
-	    public static void incrementa() {
+	    public void incrementa() {
 	    	count1++;
 	    }
 
