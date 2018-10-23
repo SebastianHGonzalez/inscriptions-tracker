@@ -2,6 +2,7 @@ package ejercicios;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Ejercicio4 {
@@ -50,8 +51,8 @@ public class Ejercicio4 {
 	}
 
 	private static void informacion(List<Integer> lista1, Integer numero) {
-		// TODO: explicar salidas de los system out y sugerir alguna mejora a la implementacion
-		
+
+	    // TODO: Refactor Extract Method
 		int pares = 0;
 		for (Integer n: lista1) {
 			if (n % 2 == 0) {
@@ -59,8 +60,9 @@ public class Ejercicio4 {
 			}
 		}
 		
-		System.out.println("... " + pares);
-		
+		System.out.println("cantidad de pares: " + pares);
+
+		// TODO: Refactor Extract Method
 		List<Integer> impares = new ArrayList<Integer>();
 		for (Integer n: lista1) {
 			if (n % 2 != 0) {
@@ -68,12 +70,14 @@ public class Ejercicio4 {
 			}
 		}
 		
-		System.out.println("... " + impares.toString());
-		
+		System.out.println("impares: " + impares.toString());
+
+		// TODO: Refactor Rename Variable
 		int p = lista1.size() / 2;
 		
-		System.out.println("..." + lista1.indexOf(p));
-		
+		System.out.println("elemento central: " + lista1.indexOf(p));
+
+		// TODO: Refactor Extract Method
 		int c = 0;
 		for (Integer n: lista1) {
 			if (n > numero) {
@@ -81,11 +85,11 @@ public class Ejercicio4 {
 			}
 		}
 		if (c > lista1.size() / 2) {
-			System.out.println("...");
+			System.out.println("mayoria mayores a numero dado");
 		} else if (c > 0) {
-			System.out.println("...");
+			System.out.println("existen mayores a numero dado");
 		} else {
-			System.out.println("...");
+			System.out.println("no existen mayores a numero dado");
 		}
 	}
 
@@ -97,9 +101,8 @@ public class Ejercicio4 {
 	 * 
 	 */
 	private static List<Integer> unionListas(List<Integer> lista1, List<Integer> lista2) {
-		// TODO: corregir el metodo para que funcione correctamente 
-		
-		List<Integer> union = null;
+
+		List<Integer> union = new ArrayList<>();
 		
 		union.addAll(lista1);
 		
@@ -120,8 +123,15 @@ public class Ejercicio4 {
 	 * 
 	 */
 	private static List<Integer> interseccionListas(List<Integer> lista1, List<Integer> lista2) {
-		// TODO:
-		return new ArrayList<Integer>();
+		List<Integer> intersection = new ArrayList<>();
+
+		for(int i = 0; i < lista1.size(); i++) {
+		    if(lista2.contains(lista1.get(i)) && !intersection.contains(lista1.get(i))) {
+		        intersection.add(lista1.get(i));
+            }
+        }
+
+		return intersection;
 	}
 
 	/***
@@ -131,8 +141,9 @@ public class Ejercicio4 {
 	 * 
 	 */
 	private static List<Integer> ordenaListaAscendente(List<Integer> lista1) {
-		// TODO:
-		return new ArrayList<Integer>();
+        List<Integer> ordered = new ArrayList<Integer>(lista1);
+        ordered.sort((Integer x, Integer y) -> x - y);
+        return ordered;
 	}
 
 	/***
@@ -142,8 +153,9 @@ public class Ejercicio4 {
 	 * 
 	 */
 	private static List<Integer> ordenaListaDescendente(List<Integer> lista2) {
-		// TODO:
-		return new ArrayList<Integer>();
+		List<Integer> ordered = new ArrayList<Integer>(lista2);
+        ordered.sort((Integer x, Integer y) -> y - x);
+		return ordered;
 	}
 
 	/***
@@ -156,7 +168,16 @@ public class Ejercicio4 {
 	 * 
 	 */
 	private static boolean tienenMismoContenido(List<Integer> lista1, List<Integer> lista2) {
-		// TODO:		
+		if (lista1.size() != lista2.size()) {
+			return false;
+		}
+
+		for (int i = 0; i < lista1.size(); i++) {
+			if(lista1.get(i) != lista2.get(i)){
+				return false;
+			}
+		}
+
 		return true;
 	}
 
